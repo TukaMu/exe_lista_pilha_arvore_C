@@ -127,6 +127,36 @@ void troca_val(struct elemento *fila1, struct elemento *fila2)
 }
 
 // APAGA VALOR
+struct elemetno *apaga(struct elemento *fila, int local)
+{
+    if (fila != NULL)
+    {
+        struct elemento *aux, *aux2;
+        aux = fila;
+        if (local == 0)
+        {
+            fila = fila->prox;
+            free(aux);
+        }
+        else
+        {
+            for (; aux != NULL; aux = aux->prox, local--)
+            {
+                if (local == 1)
+                {
+                    aux2 = aux;
+                }
+                else if (local == 0)
+                {
+                    aux2->prox = aux->prox;
+                    free(aux);
+                    break;
+                }
+            }
+        }
+        return fila;
+    }
+}
 
 // UTEIS ----------------------------------------------------------------------
 
@@ -206,6 +236,11 @@ void main()
     mostra_fila(fila2);
     printf("\n");
     mostra_fila(fila3);
+
+    fila1 = apaga(fila1, 0);
+
+    printf("\nDepois de apagar local 3 \n");
+    mostra_fila(fila1);
 
     if ((freefila(fila1) + freefila(fila2) + freefila(fila3)) == 3)
     {

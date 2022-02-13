@@ -145,6 +145,44 @@ void troca_val(struct elemento *fila1, struct elemento *fila2)
     }
 }
 
+// APAGAR LOCAL
+struct elemetno *apaga(struct elemento *fila, int local)
+{
+    if (fila != NULL)
+    {
+        struct elemento *aux, *aux2;
+        aux = fila;
+        if (local == 0)
+        {
+            for (aux2 = fila; aux2->prox != fila; aux2 = aux2->prox)
+                ;
+
+            fila = fila->prox;
+            aux2->prox = fila;
+            free(aux);
+        }
+        else
+        {
+            do
+            {
+                if (local == 1)
+                {
+                    aux2 = aux;
+                }
+                else if (local == 0)
+                {
+                    aux2->prox = aux->prox;
+                    free(aux);
+                    break;
+                }
+                aux = aux->prox;
+                local--;
+            } while (aux != fila);
+        }
+        return fila;
+    }
+}
+
 // UTEIS ----------------------------------------------------------------------
 
 // LIMPA LISTA
@@ -209,6 +247,7 @@ struct elemento *cria_fila(struct elemento *fila)
 void main()
 {
     struct elemento *fila1, *fila2, *fila3;
+
     fila1 = NULL;
     fila2 = NULL;
     fila3 = NULL;
@@ -241,6 +280,11 @@ void main()
     mostra_fila(fila2, NULL);
     printf("\n");
     mostra_fila(fila3, NULL);
+
+    fila1 = apaga(fila1, 0);
+
+    printf("\n DPS MUDANCA2\n");
+    mostra_fila(fila1, NULL);
 
     if ((freefila(fila1, NULL) + freefila(fila2, NULL) + freefila(fila3, NULL)) == 3)
     {
