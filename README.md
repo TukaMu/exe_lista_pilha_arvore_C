@@ -2,4 +2,4 @@
 Algumas funções sobre listas, pilhas e árvores em C
 
 ## Funções
-Estão nos códigos funções relacionadas a criação e o trabalho de listas, pilhas e árvores.
+Estão nos códigos funções relacionadas a criação e o trabalho de listas, pilhas, árvores e matriz esparsa.
